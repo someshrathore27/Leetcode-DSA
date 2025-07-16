@@ -9,22 +9,24 @@ public:
     bool isValid(string s)
     {
         stack<char> st;
-        for (int i = 0; i < s.size(); i++) 
+        for(auto ch:s)
         {
-            char c = s[i];
-            if (c == '(' || c == '[' || c == '{') 
+            if(ch=='[' || ch=='{' || ch=='(')
             {
-                st.push(c);
-            } 
-            else 
-            {
-                if (st.empty() || !match(st.top(), c)) 
+                st.push(ch);
+            }
+            else{
+                if(st.empty() ||!match(st.top(),ch))
                 {
                     return false;
                 }
                 st.pop();
             }
         }
-        return st.empty();
+        if(!st.empty())
+        {
+            return false;
+        }
+        return true;
     }
 };
