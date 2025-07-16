@@ -1,44 +1,42 @@
 class Solution {
 public:
-    int t[101][101];
-    bool solve(int i,int cnt, string s)
-    {
-        if(i==s.length())
+    bool checkValidString(string s) {
+        int n=s.length();
+        stack<int>openst;
+        stack<int>asterisk;
+        for(int i=0;i<n;i++)
         {
-            return (cnt==0);
-        }
-        if(t[i][cnt]!=-1)
-        {
-            return t[i][cnt];
-        }
-        bool isvalid=false;
-        if(s[i]=='(')
-        {
-            isvalid=solve(i+1,cnt+1,s);
-        }
-        else if(s[i]=='*')
-        {
-            //open bracket
-            isvalid |= solve(i+1,cnt+1,s);
-
-            //nothing
-            isvalid |= solve(i+1,cnt,s);
-
-            //close bracket
-            if(cnt>0)
+            if(s[i]=='(')
             {
-                isvalid |= solve(i+1,cnt-1,s);
+                openst.push(i);
+            }
+            else if(s[i]=='*')
+            {
+                asterisk.push(i);
+            }
+            else{
+                if(!openst.empty())
+                {
+                    openst.pop();
+                }
+                else if(!asterisk.empty())
+                {
+                    asterisk.pop();
+                }
+                else{
+                    return false;
+                }
             }
         }
-        else if(cnt>0){
-            isvalid=solve(i+1,cnt-1,s);
+        while(!openst.empty() && !asterisk.empty())
+        {
+            if(openst.top() > asterisk.top())
+            {
+                return false;
+            }
+            openst.pop();
+            asterisk.pop();
         }
-        return t[i][cnt] = isvalid;
-    }
-    bool checkValidString(string s) {
-        int i=0;
-        int cnt=0;
-        memset(t,-1,sizeof(t));
-        return solve(i,cnt,s);
+        return openst.empty();
     }
 };
