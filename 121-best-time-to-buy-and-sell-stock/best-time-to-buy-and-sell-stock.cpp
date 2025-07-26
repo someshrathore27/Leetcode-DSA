@@ -8,7 +8,7 @@ public:
         int buy=arr[0];
         int sell=arr[0];
         int profit=0;
-        for(int i=0;i<arr.size();i++)
+        for(int i=1;i<arr.size();i++)
         {
             buy=min(buy,arr[i]);
             sell=arr[i];
