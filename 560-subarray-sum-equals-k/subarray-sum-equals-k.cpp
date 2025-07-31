@@ -1,6 +1,3 @@
-#include <vector>
-#include <unordered_map>
-
 class Solution {
 public:
     int subarraySum(std::vector<int>& nums, int k) {
