@@ -1,20 +1,20 @@
 class Solution {
 public:
-    int subarraySum(std::vector<int>& nums, int k) {
-        unordered_map<int, int> prefix_sum_counts;
-        prefix_sum_counts[0] = 1; 
-        int current_sum = 0;
-        int count = 0;
-        
-        for (int num : nums) 
+    int subarraySum(std::vector<int>& nums, int k) 
+    {
+       unordered_map<int,int>mp;
+        int currsum=0;
+        int cnt=0;
+        mp[0]=1;
+        for(int i=0;i<nums.size();i++)
         {
-            current_sum += num;
-            if (prefix_sum_counts.find(current_sum - k) != prefix_sum_counts.end()) {
-                count += prefix_sum_counts[current_sum - k];
+            currsum=currsum+nums[i];
+            if(mp.find(currsum-k)!=mp.end())
+            {
+                cnt=cnt+mp[currsum-k];
             }
-            prefix_sum_counts[current_sum]++;
+            mp[currsum]++;
         }
-        
-        return count;
+        return cnt;
     }
 };
