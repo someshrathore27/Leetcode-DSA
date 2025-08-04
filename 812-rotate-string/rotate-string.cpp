@@ -1,18 +1,17 @@
 class Solution {
 public:
     bool rotateString(string s, string goal) {
-        if(s.length()!=goal.length())
-        {
+        if (s.length() != goal.length())
             return false;
-        }
-        for(int i=0;i<s.length();i++)
-        {
-            string temp=s.substr(i,s.length());
-            string t=temp+(s.substr(0,i));
-            if(temp==goal || t==goal)
-            {
+
+        string rotated = s;
+        for (int i = 0; i < s.length(); i++) {
+            if (rotated == goal)
                 return true;
-            }
+            
+            char ch = rotated[0];
+            rotated.erase(0, 1);
+            rotated.push_back(ch);
         }
         return false;
     }
