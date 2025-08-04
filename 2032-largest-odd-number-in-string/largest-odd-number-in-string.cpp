@@ -9,15 +9,12 @@ public:
             if((num[e]-'0')%2!=0)
             {
                 ei=e;
+                return num.substr(0,ei+1);
                 break;
             }
             e--;
         }
         string ans="";
-        for(int i=si;i<=ei;i++)
-        {
-            ans+=num[i];
-        }
         return ans;
     }
 };
