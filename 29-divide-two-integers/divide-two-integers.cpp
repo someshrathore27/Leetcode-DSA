@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int divide(int dividend, int divisor) {
+    int divide(int dividend, int divisor) 
+    {
         if(dividend == INT_MIN && divisor == -1) return INT_MAX;
         if(dividend == INT_MIN && divisor == 1) return INT_MIN;
         
@@ -8,17 +9,19 @@ public:
         if((dividend >= 0 && divisor < 0) || (dividend < 0 && divisor >= 0)) 
             sign = false;
         
-        long n = labs(dividend);  // Use long to avoid INT_MIN overflow
+        long n = labs(dividend); 
         long d = labs(divisor);
         int ans = 0;
         
-        while(n >= d) {
+        while(n >= d) 
+        {
             int cnt = 0;
-            while(n >= (d << (cnt + 1))) {
+            while(n >= (d << (cnt + 1))) // d<<(cnt+1) = d*2^(cnt+1)
+            {
                 cnt++;
             }
-            ans += (1 << cnt);
-            n -= (d << cnt);
+            ans = ans+ (1 << cnt);  // 1<<cnt = 2^cnt
+            n = n-(d << cnt);  // d<<cnt = d*2^(cnt) 
         }
         
         if(!sign) ans = -ans;
