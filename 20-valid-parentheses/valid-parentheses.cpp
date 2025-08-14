@@ -1,32 +1,30 @@
 class Solution {
 public:
-    bool match(char open, char close) {
-        return (open == '(' && close == ')') || 
-               (open == '[' && close == ']') || 
-               (open == '{' && close == '}');
-    }
-
-    bool isValid(string s)
+    bool isValid(string s) 
     {
         stack<char> st;
-        for(auto ch:s)
+        for(int i = 0; i < s.length(); i++) 
         {
-            if(ch=='[' || ch=='{' || ch=='(')
+            if(s[i] == '(' || s[i] == '[' || s[i] == '{') 
             {
-                st.push(ch);
+                st.push(s[i]);
             }
-            else{
-                if(st.empty() ||!match(st.top(),ch))
+            else 
+            {
+                if(st.empty()) return false;
+                
+                if((s[i] == ')' && st.top() == '(') ||
+                   (s[i] == ']' && st.top() == '[') ||
+                   (s[i] == '}' && st.top() == '{')) 
+                {
+                    st.pop();
+                }
+                else 
                 {
                     return false;
                 }
-                st.pop();
             }
         }
-        if(!st.empty())
-        {
-            return false;
-        }
-        return true;
+        return st.empty();
     }
 };
