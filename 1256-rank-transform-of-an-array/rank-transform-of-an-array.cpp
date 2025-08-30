@@ -1,6 +1,10 @@
 class Solution {
 public:
     vector<int> arrayRankTransform(vector<int>& arr) {
+        if(arr.size()==0)
+        {
+            return arr;
+        }
         vector<int>sorted(arr.begin(),arr.end());
         sort(sorted.begin(),sorted.end());
         unordered_map<int,int>mp;
