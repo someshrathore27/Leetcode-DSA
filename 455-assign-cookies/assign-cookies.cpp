@@ -8,11 +8,10 @@ public:
         int cnt=0;
         while(l<g.size() && r<s.size())
         {
-            if(s[r]>=g[l])
+            if(g[l]<=s[r])
             {
+                l++;r++;
                 cnt++;
-                l++;
-                r++;
             }
             else{
                 r++;
