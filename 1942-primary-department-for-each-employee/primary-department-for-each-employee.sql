@@ -7,7 +7,8 @@ FROM (
                    CASE 
                        WHEN primary_flag = 'Y' THEN 1
                        ELSE 2
-                   END
+                   END,
+                   department_id
            ) AS rn
     FROM Employee
 ) t
